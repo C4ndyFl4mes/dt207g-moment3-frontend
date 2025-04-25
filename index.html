@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/main.scss">
+    <script type="module" src="/src/scripts/main.ts"></script>
+    <title>CV</title>
+</head>
+
+<body>
+    <header>
+        <div class="top">
+            <p>Backend-baserad webbutveckling - moment 2 - Isaac Svedin</p>
+        </div>
+        <nav>
+            <ul>
+                <li class="here">
+                    <a href="/index.html">CV</a>
+                </li>
+                <li>
+                    <a href="/src/pages/add.html">Lägg till</a>
+                </li>
+                <li>
+                    <a href="/src/pages/about.html">Om</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>CV</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Företagsnamn</th>
+                        <th>Arbetsuppgift</th>
+                        <th>Plats</th>
+                        <th>Inledningsdatum</th>
+                        <th>Avgångsdatum</th>
+                        <th>Beskrivning</th>
+                    </tr>
+                </thead>
+                <tbody id="table-data"></tbody>
+            </table>
+        </div>
+
+    </main>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <input type="hidden" id="item-id-hidden-value">
+            <div class="popup-item">
+                <h2>Uppdatera</h2>
+                <label>
+                    <span>Företagsnamn:</span>
+                    <input type="text" id="companyname-input">
+                </label>
+                <label>
+                    <span>Arbetsuppgift:</span>
+                    <input type="text" id="jobtitle-input">
+                </label>
+                <label>
+                    <span>Plats:</span>
+                    <input type="text" id="location-input">
+                </label>
+                <label>
+                    <span>Inledningsdatum:</span>
+                    <input type="date" id="startdate-input">
+                </label>
+                <label>
+                    <span>Avgångsdatum:</span>
+                    <input type="date" id="enddate-input">
+                </label>
+                <label>
+                    <span>Beskrivning</span>
+                    <textarea id="description-input"></textarea>
+                </label>
+                <div>
+                    <span>Vill du uppdatera?</span>
+                    <button id="update-btn">Uppdatera</button>
+                </div>
+            </div>
+            <div class="popup-item">
+                <h2>Radera</h2>
+                <span>Vill du radera?</span>
+                <button id="delete-btn">Radera</button>
+            </div>
+            <div class="popup-item" id="error-container"></div>
+        </div>
+    </div>
+</body>
+
+</html>
