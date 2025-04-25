@@ -33,19 +33,21 @@
             <article>
                 <h2>Beskrivning</h2>
                 <p>
-                    Den är webbplatsens syfte är att lägga till CV-liknande innehåll till en databas. Informationen som
+                    Den är webbplatsens syfte är att lägga till CV-liknande innehåll till en NoSQL databas, i det här
+                    fallet MongoDB. Informationen som
                     lagras är företagsnamn, arbetsuppgift, plats, inledningsdatum, avslutningsdatum och beskrivning.
-                    Det är en Postgres databas som ligger på Render, det är gratis version så det kan ta några sekunder
-                    för att den ska startas.
+                    API:et ligger på render, NoSQL databasen ligger på Atlas och frontend applikationen ligger på
+                    Netlify. Jag lade till att det utförs en kontroll innan en förfrågan skickas, enligt feedback från
+                    Malin.
                 </p>
             </article>
             <article>
                 <h2>Slutsats</h2>
                 <p>
-                    Det var jättekul att testa göra ett API. Jag använde inte parametrar i URL:en, istället använde jag
-                    body. Vid hämtning och radering vore det nog bäst ifall jag hade använt en parameter.
-                    Jag som håller på att göra en Discord bot kan ha stor nytta då jag har tänkt att också ha en
-                    webbsida till boten, vilket betyder att API:et kan användas av både boten och webbsidan.
+                    Använda Mongoose i API:et för kontakt med MongoDB var väldigt mycket smidigare än med Postgres som
+                    jag gjorde i föregående moment. Jag är dock tveksam om MongoDB är kraftfullt nog på egenhand göra
+                    det jag vill med min DC-bott. Utöver det, kommer jag nog använda MongoDB när relationer inte är så
+                    viktiga.
                 </p>
             </article>
         </div>
