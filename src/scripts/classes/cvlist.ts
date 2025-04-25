@@ -57,7 +57,7 @@ export class CVList {
      */
     public async updateItem(hiddenidINPUT: HTMLInputElement, inputs: Array<HTMLInputElement>, popupDIV: HTMLElement): Promise<void> {
         const item: ICVItem = {
-            id: Number(hiddenidINPUT.value),
+            _id: hiddenidINPUT.value,
             companyname: inputs[0].value,
             jobtitle: inputs[1].value,
             location: inputs[2].value,
@@ -80,7 +80,7 @@ export class CVList {
      * @param popupDIV - popup elementet.
      */
     public async deleteItem(hiddenidINPUT: HTMLInputElement, popupDIV: HTMLElement): Promise<void> {
-        const error: IError = await API.remove(Number(hiddenidINPUT.value));
+        const error: IError = await API.remove(hiddenidINPUT.value);
         if (error.valid) {
             popupDIV.style.display = "none";
             await this.setList();
@@ -113,12 +113,13 @@ export class CVList {
      */
     public render(parentEL: HTMLElement, popupDIV: HTMLElement, hiddenidINPUT: HTMLInputElement, inputs: Array<HTMLInputElement>): void {
         parentEL.innerHTML = "";
-        this.list.forEach(item => {
-            const mainTR: HTMLElement = document.createElement("tr");
-            mainTR.className = "cv-item-tr";
-            const formattedStartDate = (new Date(item.startdate)).toISOString().split("T")[0];
-            const formattedEndDate = (new Date(item.enddate)).toISOString().split("T")[0];
-            mainTR.innerHTML = `
+        if (this.list.length > 0) {
+            this.list.forEach(item => {
+                const mainTR: HTMLElement = document.createElement("tr");
+                mainTR.className = "cv-item-tr";
+                const formattedStartDate = (new Date(item.startdate)).toISOString().split("T")[0];
+                const formattedEndDate = (new Date(item.enddate)).toISOString().split("T")[0];
+                mainTR.innerHTML = `
                 <td>${item.companyname}</td>
                 <td>${item.jobtitle}</td>
                 <td>${item.location}</td>
@@ -127,18 +128,27 @@ export class CVList {
                 <td>${item.description}</td>
             `;
 
-            mainTR.addEventListener("click", () => {
-                popupDIV.style.display = "flex";
-                hiddenidINPUT.value = String(item.id);
+                mainTR.addEventListener("click", () => {
+                    popupDIV.style.display = "flex";
+                    hiddenidINPUT.value = String(item._id);
 
-                inputs[0].value = item.companyname;
-                inputs[1].value = item.jobtitle;
-                inputs[2].value = item.location;
-                inputs[3].value = formattedStartDate;
-                inputs[4].value = formattedEndDate;
-                inputs[5].value = item.description;
+                    inputs[0].value = item.companyname;
+                    inputs[1].value = item.jobtitle;
+                    inputs[2].value = item.location;
+                    inputs[3].value = formattedStartDate;
+                    inputs[4].value = formattedEndDate;
+                    inputs[5].value = item.description;
+                });
+                parentEL.appendChild(mainTR);
             });
-            parentEL.appendChild(mainTR);
-        });
+        } else {
+            parentEL.innerHTML = `
+            <tr class=empty-list-tr>
+                <td colspan=6>
+                    Det finns ingenting än.
+                </td>
+            </tr>
+            `;
+        }
     }
 }
